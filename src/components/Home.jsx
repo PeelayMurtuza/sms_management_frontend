@@ -154,13 +154,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
-            {/* FOOTER */}
-            <footer className="bg-white border-t mt-12">
-                <div className="max-w-7xl mx-auto px-6 py-8 text-sm text-slate-500 text-center">
-                    © {new Date().getFullYear()} CampusConnect — Empowering educational communication.
-                </div>
-            </footer>
         </div>
     );
 }

@@ -14,7 +14,7 @@ function Sidebar({ isOpen }) {
       ${isOpen ? 'w-64' : 'w-20'}`}
     >
       <h1
-        className={`text-xl font-bold text-gray-800 mb-8 transition-all duration-300 overflow-hidden whitespace-nowrap ${
+        className={`text-xl pl-10 font-bold text-gray-800 mb-8 transition-all duration-300 overflow-hidden whitespace-nowrap ${
           isOpen ? 'opacity-100' : 'opacity-0 w-0'
         }`}
       >
@@ -58,13 +58,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex">
+      <div className="flex ">
         {/* Toggle Button (Visible in both desktop & mobile) */}
         <button
           onClick={toggleSidebar}
           className="fixed top-4 left-4 z-50 bg-blue-600 text-white p-2 rounded-md shadow-md hover:bg-blue-700 transition"
         >
-          {isOpen ? '✖' : '☰'}
+          {isOpen ? 'X' : '☰'}
         </button>
 
         {/* Sidebar */}
@@ -85,6 +85,12 @@ function App() {
           </Routes>
         </div>
       </div>
+       {/* FOOTER */}
+            <footer className="bg-white border-t mt-12">
+                <div className="max-w-7xl mx-auto px-6 py-8 text-sm text-slate-500 text-center">
+                    © {new Date().getFullYear()} CampusConnect — Empowering educational communication.
+                </div>
+            </footer>
     </BrowserRouter>
   )
 }
