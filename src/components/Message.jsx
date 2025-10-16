@@ -1,61 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Message = () => {
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await fetch("https://your-backend.com/api/getMessages.php");
-        if (!response.ok) throw new Error("Failed to fetch messages");
-        const data = await response.json();
-        setMessages(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMessages();
-  }, []);
-
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!file || !message) {
       alert("Please upload a CSV and enter a message");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("message", message);
-
-    try {
-      setUploading(true);
-      const res = await fetch("https://your-backend.com/api/uploadMessages.php", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await res.json();
-      alert(result.message);
-
-      // Refresh message list
-      const updated = await fetch("https://your-backend.com/api/getMessages.php");
-      const newData = await updated.json();
-      setMessages(newData);
-    } catch (err) {
-      alert("Error uploading or sending messages");
-    } finally {
+    setUploading(true);
+    // Just simulate upload process
+    setTimeout(() => {
+      alert("Messages processed successfully!");
+      setMessages((prev) => [
+        ...prev,
+        { to: "All Contacts", message: message, status: "Sent" },
+      ]);
       setUploading(false);
-    }
+    }, 2000);
   };
 
   return (
@@ -117,9 +85,7 @@ const Message = () => {
           📨 Recent Message Logs
         </h2>
 
-        {loading && <p className="text-gray-500">Loading messages...</p>}
-        {error && <p className="text-red-600">Error: {error}</p>}
-        {!loading && !error && messages.length === 0 && (
+        {messages.length === 0 && (
           <p className="text-gray-500 text-sm">No messages found yet.</p>
         )}
 
@@ -135,15 +101,7 @@ const Message = () => {
                 </p>
                 <p className="text-gray-800">{m.message}</p>
               </div>
-              <p
-                className={`text-sm font-medium mt-1 md:mt-0 ${
-                  m.status === "Sent"
-                    ? "text-green-600"
-                    : m.status === "Pending"
-                    ? "text-yellow-600"
-                    : "text-red-600"
-                }`}
-              >
+              <p className="text-sm font-medium mt-1 md:mt-0 text-green-600">
                 {m.status}
               </p>
             </div>
