@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Message from './components/Message'
 import Contact from './components/Contact'
 import Settings from './components/Setting'
+import Dashboard from './components/Dashboard'
 
 // Sidebar layout
 function Sidebar() {
@@ -80,6 +81,7 @@ function App() {
         <div className="flex-1 ml-64 p-8 bg-gray-50 min-h-screen">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contacts" element={<Contact />} />
             <Route path="/message" element={<Message />} />
             <Route path="/settings" element={<Settings />} />
